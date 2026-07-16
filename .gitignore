@@ -5,6 +5,9 @@ __pycache__/
 venv/
 *.egg-info/
 
+# Raw data (data.json in docs/ is the built output and is NOT ignored)
+*.csv
+
 # Claude Code local settings
 .claude/settings.local.json
 
