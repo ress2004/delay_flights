@@ -1,0 +1,1346 @@
+{
+  "ABE": {
+    "city": "Allentown, PA",
+    "name": "Lehigh Valley International"
+  },
+  "ABI": {
+    "city": "Abilene, TX",
+    "name": "Abilene Regional"
+  },
+  "ABQ": {
+    "city": "Albuquerque, NM",
+    "name": "Albuquerque International Sunport"
+  },
+  "ABR": {
+    "city": "Aberdeen, SD",
+    "name": "Aberdeen Regional"
+  },
+  "ABY": {
+    "city": "Albany, GA",
+    "name": "Southwest Georgia Regional"
+  },
+  "ACK": {
+    "city": "Nantucket, MA",
+    "name": "Nantucket Memorial"
+  },
+  "ACT": {
+    "city": "Waco, TX",
+    "name": "Waco Regional"
+  },
+  "ACV": {
+    "city": "Arcata/Eureka, CA",
+    "name": "California Redwood Coast-Humboldt County"
+  },
+  "ACY": {
+    "city": "Atlantic City, NJ",
+    "name": "Atlantic City International"
+  },
+  "ADQ": {
+    "city": "Kodiak, AK",
+    "name": "Kodiak Airport"
+  },
+  "AEX": {
+    "city": "Alexandria, LA",
+    "name": "Alexandria International"
+  },
+  "AGS": {
+    "city": "Augusta, GA",
+    "name": "Augusta Regional"
+  },
+  "AKN": {
+    "city": "King Salmon, AK",
+    "name": "King Salmon Airport"
+  },
+  "ALB": {
+    "city": "Albany, NY",
+    "name": "Albany International"
+  },
+  "ALO": {
+    "city": "Waterloo, IA",
+    "name": "Waterloo Regional"
+  },
+  "AMA": {
+    "city": "Amarillo, TX",
+    "name": "Rick Husband Amarillo International"
+  },
+  "ANC": {
+    "city": "Anchorage, AK",
+    "name": "Ted Stevens Anchorage International"
+  },
+  "APN": {
+    "city": "Alpena, MI",
+    "name": "Alpena County Regional"
+  },
+  "ASE": {
+    "city": "Aspen, CO",
+    "name": "Aspen/Pitkin County"
+  },
+  "ATL": {
+    "city": "Atlanta, GA",
+    "name": "Hartsfield-Jackson Atlanta International"
+  },
+  "ATW": {
+    "city": "Appleton, WI",
+    "name": "Appleton International"
+  },
+  "ATY": {
+    "city": "Watertown, SD",
+    "name": "Watertown Regional"
+  },
+  "AUS": {
+    "city": "Austin, TX",
+    "name": "Austin-Bergstrom International"
+  },
+  "AVL": {
+    "city": "Asheville, NC",
+    "name": "Asheville Regional"
+  },
+  "AVP": {
+    "city": "Wilkes-Barre/Scranton, PA",
+    "name": "Wilkes-Barre/Scranton International"
+  },
+  "AZA": {
+    "city": "Mesa, AZ",
+    "name": "Phoenix-Mesa Gateway"
+  },
+  "AZO": {
+    "city": "Kalamazoo, MI",
+    "name": "Kalamazoo/Battle Creek International"
+  },
+  "BDL": {
+    "city": "Hartford, CT",
+    "name": "Bradley International"
+  },
+  "BET": {
+    "city": "Bethel, AK",
+    "name": "Bethel Airport"
+  },
+  "BFF": {
+    "city": "Scottsbluff, NE",
+    "name": "Western Nebraska Regional"
+  },
+  "BFL": {
+    "city": "Bakersfield, CA",
+    "name": "Meadows Field"
+  },
+  "BGM": {
+    "city": "Binghamton, NY",
+    "name": "Greater Binghamton Airport"
+  },
+  "BGR": {
+    "city": "Bangor, ME",
+    "name": "Bangor International"
+  },
+  "BHM": {
+    "city": "Birmingham, AL",
+    "name": "Birmingham-Shuttlesworth International"
+  },
+  "BIH": {
+    "city": "Bishop, CA",
+    "name": "Eastern Sierra Regional"
+  },
+  "BIL": {
+    "city": "Billings, MT",
+    "name": "Billings Logan International"
+  },
+  "BIS": {
+    "city": "Bismarck, ND",
+    "name": "Bismarck Municipal"
+  },
+  "BJI": {
+    "city": "Bemidji, MN",
+    "name": "Bemidji Regional"
+  },
+  "BLI": {
+    "city": "Bellingham, WA",
+    "name": "Bellingham International"
+  },
+  "BLV": {
+    "city": "Belleville, IL",
+    "name": "MidAmerica St. Louis Airport / Scott AFB"
+  },
+  "BMI": {
+    "city": "Bloomington, IL",
+    "name": "Central Illinois Regional"
+  },
+  "BNA": {
+    "city": "Nashville, TN",
+    "name": "Nashville International"
+  },
+  "BOI": {
+    "city": "Boise, ID",
+    "name": "Boise Airport"
+  },
+  "BOS": {
+    "city": "Boston, MA",
+    "name": "Boston Logan International"
+  },
+  "BPT": {
+    "city": "Beaumont, TX",
+    "name": "Southeast Texas Regional"
+  },
+  "BQN": {
+    "city": "Aguadilla, PR",
+    "name": "Rafael Hernández International"
+  },
+  "BRD": {
+    "city": "Brainerd, MN",
+    "name": "Brainerd Lakes Regional"
+  },
+  "BRO": {
+    "city": "Brownsville, TX",
+    "name": "Brownsville/South Padre Island International"
+  },
+  "BRW": {
+    "city": "Utqiagvik (Barrow), AK",
+    "name": "Wiley Post-Will Rogers Memorial"
+  },
+  "BTM": {
+    "city": "Butte, MT",
+    "name": "Bert Mooney Airport"
+  },
+  "BTR": {
+    "city": "Baton Rouge, LA",
+    "name": "Baton Rouge Metropolitan"
+  },
+  "BTV": {
+    "city": "Burlington, VT",
+    "name": "Burlington International"
+  },
+  "BUF": {
+    "city": "Buffalo, NY",
+    "name": "Buffalo Niagara International"
+  },
+  "BUR": {
+    "city": "Burbank, CA",
+    "name": "Hollywood Burbank Airport"
+  },
+  "BWI": {
+    "city": "Baltimore, MD",
+    "name": "Baltimore/Washington International"
+  },
+  "BZN": {
+    "city": "Bozeman, MT",
+    "name": "Bozeman Yellowstone International"
+  },
+  "CAE": {
+    "city": "Columbia, SC",
+    "name": "Columbia Metropolitan"
+  },
+  "CAK": {
+    "city": "Akron, OH",
+    "name": "Akron-Canton Airport"
+  },
+  "CDC": {
+    "city": "Cedar City, UT",
+    "name": "Cedar City Regional"
+  },
+  "CDV": {
+    "city": "Cordova, AK",
+    "name": "Merle K. (Mudhole) Smith Airport"
+  },
+  "CHA": {
+    "city": "Chattanooga, TN",
+    "name": "Chattanooga Metropolitan"
+  },
+  "CHO": {
+    "city": "Charlottesville, VA",
+    "name": "Charlottesville-Albemarle"
+  },
+  "CHS": {
+    "city": "Charleston, SC",
+    "name": "Charleston International"
+  },
+  "CID": {
+    "city": "Cedar Rapids, IA",
+    "name": "The Eastern Iowa Airport"
+  },
+  "CIU": {
+    "city": "Sault Ste. Marie, MI",
+    "name": "Chippewa County International"
+  },
+  "CLD": {
+    "city": "Carlsbad, CA",
+    "name": "McClellan-Palomar Airport"
+  },
+  "CLE": {
+    "city": "Cleveland, OH",
+    "name": "Cleveland Hopkins International"
+  },
+  "CLL": {
+    "city": "College Station, TX",
+    "name": "Easterwood Airport"
+  },
+  "CLT": {
+    "city": "Charlotte, NC",
+    "name": "Charlotte Douglas International"
+  },
+  "CMH": {
+    "city": "Columbus, OH",
+    "name": "John Glenn Columbus International"
+  },
+  "CMI": {
+    "city": "Champaign, IL",
+    "name": "University of Illinois Willard Airport"
+  },
+  "CMX": {
+    "city": "Hancock, MI",
+    "name": "Houghton County Memorial"
+  },
+  "COD": {
+    "city": "Cody, WY",
+    "name": "Yellowstone Regional"
+  },
+  "COS": {
+    "city": "Colorado Springs, CO",
+    "name": "Colorado Springs Airport"
+  },
+  "COU": {
+    "city": "Columbia, MO",
+    "name": "Columbia Regional"
+  },
+  "CPR": {
+    "city": "Casper, WY",
+    "name": "Casper-Natrona County International"
+  },
+  "CRP": {
+    "city": "Corpus Christi, TX",
+    "name": "Corpus Christi International"
+  },
+  "CRW": {
+    "city": "Charleston, WV",
+    "name": "Yeager Airport"
+  },
+  "CVG": {
+    "city": "Cincinnati, OH",
+    "name": "Cincinnati/Northern Kentucky International"
+  },
+  "CWA": {
+    "city": "Mosinee, WI",
+    "name": "Central Wisconsin Airport"
+  },
+  "CYS": {
+    "city": "Cheyenne, WY",
+    "name": "Cheyenne Regional"
+  },
+  "DAB": {
+    "city": "Daytona Beach, FL",
+    "name": "Daytona Beach International"
+  },
+  "DAL": {
+    "city": "Dallas, TX",
+    "name": "Dallas Love Field"
+  },
+  "DAY": {
+    "city": "Dayton, OH",
+    "name": "Dayton International"
+  },
+  "DCA": {
+    "city": "Washington, DC",
+    "name": "Ronald Reagan Washington National"
+  },
+  "DDC": {
+    "city": "Dodge City, KS",
+    "name": "Dodge City Regional"
+  },
+  "DEC": {
+    "city": "Decatur, IL",
+    "name": "Decatur Airport"
+  },
+  "DEN": {
+    "city": "Denver, CO",
+    "name": "Denver International"
+  },
+  "DFW": {
+    "city": "Dallas/Fort Worth, TX",
+    "name": "Dallas/Fort Worth International"
+  },
+  "DIK": {
+    "city": "Dickinson, ND",
+    "name": "Dickinson Theodore Roosevelt Regional"
+  },
+  "DLH": {
+    "city": "Duluth, MN",
+    "name": "Duluth International"
+  },
+  "DRO": {
+    "city": "Durango, CO",
+    "name": "Durango-La Plata County"
+  },
+  "DSM": {
+    "city": "Des Moines, IA",
+    "name": "Des Moines International"
+  },
+  "DTW": {
+    "city": "Detroit, MI",
+    "name": "Detroit Metropolitan Wayne County"
+  },
+  "DVL": {
+    "city": "Devils Lake, ND",
+    "name": "Devils Lake Regional"
+  },
+  "EAR": {
+    "city": "Kearney, NE",
+    "name": "Kearney Regional"
+  },
+  "EAU": {
+    "city": "Eau Claire, WI",
+    "name": "Chippewa Valley Regional"
+  },
+  "ECP": {
+    "city": "Panama City, FL",
+    "name": "Northwest Florida Beaches International"
+  },
+  "EGE": {
+    "city": "Eagle/Vail, CO",
+    "name": "Eagle County Regional"
+  },
+  "EKO": {
+    "city": "Elko, NV",
+    "name": "Elko Regional"
+  },
+  "ELM": {
+    "city": "Elmira, NY",
+    "name": "Elmira Corning Regional"
+  },
+  "ELP": {
+    "city": "El Paso, TX",
+    "name": "El Paso International"
+  },
+  "ESC": {
+    "city": "Escanaba, MI",
+    "name": "Delta County Airport"
+  },
+  "EUG": {
+    "city": "Eugene, OR",
+    "name": "Eugene Airport"
+  },
+  "EVV": {
+    "city": "Evansville, IN",
+    "name": "Evansville Regional"
+  },
+  "EWN": {
+    "city": "New Bern, NC",
+    "name": "Coastal Carolina Regional"
+  },
+  "EWR": {
+    "city": "Newark, NJ",
+    "name": "Newark Liberty International"
+  },
+  "EYW": {
+    "city": "Key West, FL",
+    "name": "Key West International"
+  },
+  "FAI": {
+    "city": "Fairbanks, AK",
+    "name": "Fairbanks International"
+  },
+  "FAR": {
+    "city": "Fargo, ND",
+    "name": "Hector International"
+  },
+  "FAT": {
+    "city": "Fresno, CA",
+    "name": "Fresno Yosemite International"
+  },
+  "FCA": {
+    "city": "Kalispell, MT",
+    "name": "Glacier Park International"
+  },
+  "FLG": {
+    "city": "Flagstaff, AZ",
+    "name": "Flagstaff Pulliam"
+  },
+  "FLL": {
+    "city": "Fort Lauderdale, FL",
+    "name": "Fort Lauderdale-Hollywood International"
+  },
+  "FMN": {
+    "city": "Farmington, NM",
+    "name": "Four Corners Regional"
+  },
+  "FNT": {
+    "city": "Flint, MI",
+    "name": "Bishop International"
+  },
+  "FOD": {
+    "city": "Fort Dodge, IA",
+    "name": "Fort Dodge Regional"
+  },
+  "FSD": {
+    "city": "Sioux Falls, SD",
+    "name": "Joe Foss Field / Sioux Falls Regional"
+  },
+  "FSM": {
+    "city": "Fort Smith, AR",
+    "name": "Fort Smith Regional"
+  },
+  "FWA": {
+    "city": "Fort Wayne, IN",
+    "name": "Fort Wayne International"
+  },
+  "GCC": {
+    "city": "Gillette, WY",
+    "name": "Gillette Campbell County"
+  },
+  "GCK": {
+    "city": "Garden City, KS",
+    "name": "Garden City Regional"
+  },
+  "GEG": {
+    "city": "Spokane, WA",
+    "name": "Spokane International"
+  },
+  "GFK": {
+    "city": "Grand Forks, ND",
+    "name": "Grand Forks International"
+  },
+  "GGG": {
+    "city": "Longview, TX",
+    "name": "East Texas Regional"
+  },
+  "GJT": {
+    "city": "Grand Junction, CO",
+    "name": "Grand Junction Regional"
+  },
+  "GNV": {
+    "city": "Gainesville, FL",
+    "name": "Gainesville Regional"
+  },
+  "GPT": {
+    "city": "Gulfport, MS",
+    "name": "Gulfport-Biloxi International"
+  },
+  "GRB": {
+    "city": "Green Bay, WI",
+    "name": "Green Bay Austin Straubel International"
+  },
+  "GRI": {
+    "city": "Grand Island, NE",
+    "name": "Central Nebraska Regional"
+  },
+  "GRK": {
+    "city": "Killeen, TX",
+    "name": "Killeen-Fort Hood Regional"
+  },
+  "GRR": {
+    "city": "Grand Rapids, MI",
+    "name": "Gerald R. Ford International"
+  },
+  "GSO": {
+    "city": "Greensboro, NC",
+    "name": "Piedmont Triad International"
+  },
+  "GSP": {
+    "city": "Greer, SC",
+    "name": "Greenville-Spartanburg International"
+  },
+  "GTF": {
+    "city": "Great Falls, MT",
+    "name": "Great Falls International"
+  },
+  "GTR": {
+    "city": "Columbus, MS",
+    "name": "Golden Triangle Regional"
+  },
+  "GUC": {
+    "city": "Gunnison, CO",
+    "name": "Gunnison-Crested Butte Regional"
+  },
+  "GUM": {
+    "city": "Guam",
+    "name": "Antonio B. Won Pat International"
+  },
+  "HDN": {
+    "city": "Hayden/Steamboat Springs, CO",
+    "name": "Yampa Valley Airport"
+  },
+  "HHH": {
+    "city": "Hilton Head Island, SC",
+    "name": "Hilton Head Airport"
+  },
+  "HIB": {
+    "city": "Hibbing, MN",
+    "name": "Range Regional Airport"
+  },
+  "HLN": {
+    "city": "Helena, MT",
+    "name": "Helena Regional"
+  },
+  "HNL": {
+    "city": "Honolulu, HI",
+    "name": "Daniel K. Inouye International"
+  },
+  "HOB": {
+    "city": "Hobbs, NM",
+    "name": "Lea County Regional"
+  },
+  "HOU": {
+    "city": "Houston, TX",
+    "name": "William P. Hobby Airport"
+  },
+  "HPN": {
+    "city": "White Plains, NY",
+    "name": "Westchester County Airport"
+  },
+  "HRL": {
+    "city": "Harlingen, TX",
+    "name": "Valley International"
+  },
+  "HSV": {
+    "city": "Huntsville, AL",
+    "name": "Huntsville International"
+  },
+  "HTS": {
+    "city": "Huntington, WV",
+    "name": "Tri-State Airport"
+  },
+  "HYS": {
+    "city": "Hays, KS",
+    "name": "Hays Regional"
+  },
+  "IAD": {
+    "city": "Washington, DC",
+    "name": "Washington Dulles International"
+  },
+  "IAG": {
+    "city": "Niagara Falls, NY",
+    "name": "Niagara Falls International"
+  },
+  "IAH": {
+    "city": "Houston, TX",
+    "name": "George Bush Intercontinental"
+  },
+  "ICT": {
+    "city": "Wichita, KS",
+    "name": "Wichita Dwight D. Eisenhower National"
+  },
+  "IDA": {
+    "city": "Idaho Falls, ID",
+    "name": "Idaho Falls Regional"
+  },
+  "ILM": {
+    "city": "Wilmington, NC",
+    "name": "Wilmington International"
+  },
+  "IMT": {
+    "city": "Iron Mountain/Kingsford, MI",
+    "name": "Ford Airport"
+  },
+  "IND": {
+    "city": "Indianapolis, IN",
+    "name": "Indianapolis International"
+  },
+  "INL": {
+    "city": "International Falls, MN",
+    "name": "Falls International"
+  },
+  "ISP": {
+    "city": "Islip, NY",
+    "name": "Long Island MacArthur Airport"
+  },
+  "ITO": {
+    "city": "Hilo, HI",
+    "name": "Hilo International"
+  },
+  "JAC": {
+    "city": "Jackson, WY",
+    "name": "Jackson Hole Airport"
+  },
+  "JAN": {
+    "city": "Jackson, MS",
+    "name": "Jackson-Medgar Wiley Evers International"
+  },
+  "JAX": {
+    "city": "Jacksonville, FL",
+    "name": "Jacksonville International"
+  },
+  "JFK": {
+    "city": "New York, NY",
+    "name": "John F. Kennedy International"
+  },
+  "JLN": {
+    "city": "Joplin, MO",
+    "name": "Joplin Regional"
+  },
+  "JMS": {
+    "city": "Jamestown, ND",
+    "name": "Jamestown Regional"
+  },
+  "JNU": {
+    "city": "Juneau, AK",
+    "name": "Juneau International"
+  },
+  "JST": {
+    "city": "Johnstown, PA",
+    "name": "John Murtha Johnstown-Cambria County"
+  },
+  "KOA": {
+    "city": "Kailua-Kona, HI",
+    "name": "Ellison Onizuka Kona International"
+  },
+  "KTN": {
+    "city": "Ketchikan, AK",
+    "name": "Ketchikan International"
+  },
+  "LAF": {
+    "city": "Lafayette, IN",
+    "name": "Purdue University Airport"
+  },
+  "LAN": {
+    "city": "Lansing, MI",
+    "name": "Capital Region International"
+  },
+  "LAR": {
+    "city": "Laramie, WY",
+    "name": "Laramie Regional"
+  },
+  "LAS": {
+    "city": "Las Vegas, NV",
+    "name": "Harry Reid International"
+  },
+  "LAW": {
+    "city": "Lawton, OK",
+    "name": "Lawton Fort Sill Regional"
+  },
+  "LAX": {
+    "city": "Los Angeles, CA",
+    "name": "Los Angeles International"
+  },
+  "LBB": {
+    "city": "Lubbock, TX",
+    "name": "Lubbock Preston Smith International"
+  },
+  "LBE": {
+    "city": "Latrobe, PA",
+    "name": "Arnold Palmer Regional"
+  },
+  "LBF": {
+    "city": "North Platte, NE",
+    "name": "North Platte Regional"
+  },
+  "LBL": {
+    "city": "Liberal, KS",
+    "name": "Liberal Mid-America Regional"
+  },
+  "LCH": {
+    "city": "Lake Charles, LA",
+    "name": "Lake Charles Regional"
+  },
+  "LCK": {
+    "city": "Columbus, OH",
+    "name": "Rickenbacker International"
+  },
+  "LEX": {
+    "city": "Lexington, KY",
+    "name": "Blue Grass Airport"
+  },
+  "LFT": {
+    "city": "Lafayette, LA",
+    "name": "Lafayette Regional"
+  },
+  "LGA": {
+    "city": "New York, NY",
+    "name": "LaGuardia Airport"
+  },
+  "LGB": {
+    "city": "Long Beach, CA",
+    "name": "Long Beach Airport"
+  },
+  "LIH": {
+    "city": "Lihue, HI",
+    "name": "Lihue Airport"
+  },
+  "LIT": {
+    "city": "Little Rock, AR",
+    "name": "Bill and Hillary Clinton National"
+  },
+  "LNK": {
+    "city": "Lincoln, NE",
+    "name": "Lincoln Airport"
+  },
+  "LRD": {
+    "city": "Laredo, TX",
+    "name": "Laredo International"
+  },
+  "LSE": {
+    "city": "La Crosse, WI",
+    "name": "La Crosse Regional"
+  },
+  "LWS": {
+    "city": "Lewiston, ID",
+    "name": "Lewiston-Nez Perce County"
+  },
+  "MAF": {
+    "city": "Midland, TX",
+    "name": "Midland International Air and Space Port"
+  },
+  "MBS": {
+    "city": "Saginaw, MI",
+    "name": "MBS International"
+  },
+  "MCI": {
+    "city": "Kansas City, MO",
+    "name": "Kansas City International"
+  },
+  "MCO": {
+    "city": "Orlando, FL",
+    "name": "Orlando International"
+  },
+  "MCW": {
+    "city": "Mason City, IA",
+    "name": "Mason City Municipal"
+  },
+  "MDT": {
+    "city": "Harrisburg, PA",
+    "name": "Harrisburg International"
+  },
+  "MDW": {
+    "city": "Chicago, IL",
+    "name": "Chicago Midway International"
+  },
+  "MEI": {
+    "city": "Meridian, MS",
+    "name": "Key Field"
+  },
+  "MEM": {
+    "city": "Memphis, TN",
+    "name": "Memphis International"
+  },
+  "MFE": {
+    "city": "McAllen, TX",
+    "name": "McAllen Miller International"
+  },
+  "MFR": {
+    "city": "Medford, OR",
+    "name": "Rogue Valley International-Medford"
+  },
+  "MGM": {
+    "city": "Montgomery, AL",
+    "name": "Montgomery Regional"
+  },
+  "MGW": {
+    "city": "Morgantown, WV",
+    "name": "Morgantown Municipal"
+  },
+  "MHK": {
+    "city": "Manhattan, KS",
+    "name": "Manhattan Regional"
+  },
+  "MHT": {
+    "city": "Manchester, NH",
+    "name": "Manchester-Boston Regional"
+  },
+  "MIA": {
+    "city": "Miami, FL",
+    "name": "Miami International"
+  },
+  "MKE": {
+    "city": "Milwaukee, WI",
+    "name": "Milwaukee Mitchell International"
+  },
+  "MLB": {
+    "city": "Melbourne, FL",
+    "name": "Melbourne Orlando International"
+  },
+  "MLI": {
+    "city": "Moline, IL",
+    "name": "Quad City International"
+  },
+  "MLU": {
+    "city": "Monroe, LA",
+    "name": "Monroe Regional"
+  },
+  "MOB": {
+    "city": "Mobile, AL",
+    "name": "Mobile Regional"
+  },
+  "MOT": {
+    "city": "Minot, ND",
+    "name": "Minot International"
+  },
+  "MQT": {
+    "city": "Marquette, MI",
+    "name": "Sawyer International"
+  },
+  "MRY": {
+    "city": "Monterey, CA",
+    "name": "Monterey Regional"
+  },
+  "MSN": {
+    "city": "Madison, WI",
+    "name": "Dane County Regional"
+  },
+  "MSO": {
+    "city": "Missoula, MT",
+    "name": "Missoula Montana Airport"
+  },
+  "MSP": {
+    "city": "Minneapolis, MN",
+    "name": "Minneapolis-Saint Paul International"
+  },
+  "MSY": {
+    "city": "New Orleans, LA",
+    "name": "Louis Armstrong New Orleans International"
+  },
+  "MTJ": {
+    "city": "Montrose, CO",
+    "name": "Montrose Regional"
+  },
+  "MVY": {
+    "city": "Martha's Vineyard, MA",
+    "name": "Martha's Vineyard Airport"
+  },
+  "MYR": {
+    "city": "Myrtle Beach, SC",
+    "name": "Myrtle Beach International"
+  },
+  "OAJ": {
+    "city": "Jacksonville, NC",
+    "name": "Albert J. Ellis Airport"
+  },
+  "OAK": {
+    "city": "Oakland, CA",
+    "name": "Oakland International"
+  },
+  "OGG": {
+    "city": "Kahului, HI",
+    "name": "Kahului Airport"
+  },
+  "OKC": {
+    "city": "Oklahoma City, OK",
+    "name": "Will Rogers World Airport"
+  },
+  "OMA": {
+    "city": "Omaha, NE",
+    "name": "Eppley Airfield"
+  },
+  "OME": {
+    "city": "Nome, AK",
+    "name": "Nome Airport"
+  },
+  "ONT": {
+    "city": "Ontario, CA",
+    "name": "Ontario International"
+  },
+  "ORD": {
+    "city": "Chicago, IL",
+    "name": "Chicago O'Hare International"
+  },
+  "ORF": {
+    "city": "Norfolk, VA",
+    "name": "Norfolk International"
+  },
+  "ORH": {
+    "city": "Worcester, MA",
+    "name": "Worcester Regional"
+  },
+  "OTH": {
+    "city": "North Bend, OR",
+    "name": "Southwest Oregon Regional"
+  },
+  "OTZ": {
+    "city": "Kotzebue, AK",
+    "name": "Ralph Wien Memorial"
+  },
+  "PAE": {
+    "city": "Everett, WA",
+    "name": "Snohomish County Airport (Paine Field)"
+  },
+  "PBG": {
+    "city": "Plattsburgh, NY",
+    "name": "Plattsburgh International"
+  },
+  "PBI": {
+    "city": "West Palm Beach, FL",
+    "name": "Palm Beach International"
+  },
+  "PDX": {
+    "city": "Portland, OR",
+    "name": "Portland International"
+  },
+  "PGD": {
+    "city": "Punta Gorda, FL",
+    "name": "Punta Gorda Airport"
+  },
+  "PHL": {
+    "city": "Philadelphia, PA",
+    "name": "Philadelphia International"
+  },
+  "PHX": {
+    "city": "Phoenix, AZ",
+    "name": "Phoenix Sky Harbor International"
+  },
+  "PIA": {
+    "city": "Peoria, IL",
+    "name": "General Wayne A. Downing Peoria International"
+  },
+  "PIB": {
+    "city": "Hattiesburg/Laurel, MS",
+    "name": "Hattiesburg Laurel Regional"
+  },
+  "PIE": {
+    "city": "St. Petersburg, FL",
+    "name": "St. Pete-Clearwater International"
+  },
+  "PIH": {
+    "city": "Pocatello, ID",
+    "name": "Pocatello Regional"
+  },
+  "PIR": {
+    "city": "Pierre, SD",
+    "name": "Pierre Regional"
+  },
+  "PIT": {
+    "city": "Pittsburgh, PA",
+    "name": "Pittsburgh International"
+  },
+  "PLN": {
+    "city": "Pellston, MI",
+    "name": "Pellston Regional"
+  },
+  "PNS": {
+    "city": "Pensacola, FL",
+    "name": "Pensacola International"
+  },
+  "PPG": {
+    "city": "Pago Pago, American Samoa",
+    "name": "Pago Pago International"
+  },
+  "PQI": {
+    "city": "Presque Isle, ME",
+    "name": "Presque Isle International"
+  },
+  "PRC": {
+    "city": "Prescott, AZ",
+    "name": "Ernest A. Love Field"
+  },
+  "PSC": {
+    "city": "Pasco, WA",
+    "name": "Tri-Cities Airport"
+  },
+  "PSE": {
+    "city": "Ponce, PR",
+    "name": "Mercedita Airport"
+  },
+  "PSG": {
+    "city": "Petersburg, AK",
+    "name": "Petersburg James A. Johnson Airport"
+  },
+  "PSM": {
+    "city": "Portsmouth, NH",
+    "name": "Portsmouth International at Pease"
+  },
+  "PSP": {
+    "city": "Palm Springs, CA",
+    "name": "Palm Springs International"
+  },
+  "PVD": {
+    "city": "Providence, RI",
+    "name": "T.F. Green International"
+  },
+  "PVU": {
+    "city": "Provo, UT",
+    "name": "Provo Municipal Airport"
+  },
+  "PWM": {
+    "city": "Portland, ME",
+    "name": "Portland International Jetport"
+  },
+  "RAP": {
+    "city": "Rapid City, SD",
+    "name": "Rapid City Regional"
+  },
+  "RDD": {
+    "city": "Redding, CA",
+    "name": "Redding Municipal"
+  },
+  "RDM": {
+    "city": "Redmond, OR",
+    "name": "Roberts Field"
+  },
+  "RDU": {
+    "city": "Raleigh/Durham, NC",
+    "name": "Raleigh-Durham International"
+  },
+  "RFD": {
+    "city": "Rockford, IL",
+    "name": "Chicago Rockford International"
+  },
+  "RHI": {
+    "city": "Rhinelander, WI",
+    "name": "Rhinelander-Oneida County"
+  },
+  "RIC": {
+    "city": "Richmond, VA",
+    "name": "Richmond International"
+  },
+  "RIW": {
+    "city": "Riverton, WY",
+    "name": "Riverton Regional"
+  },
+  "RKS": {
+    "city": "Rock Springs, WY",
+    "name": "Rock Springs-Sweetwater County"
+  },
+  "RNO": {
+    "city": "Reno, NV",
+    "name": "Reno-Tahoe International"
+  },
+  "ROA": {
+    "city": "Roanoke, VA",
+    "name": "Roanoke-Blacksburg Regional"
+  },
+  "ROC": {
+    "city": "Rochester, NY",
+    "name": "Greater Rochester International"
+  },
+  "ROW": {
+    "city": "Roswell, NM",
+    "name": "Roswell International Air Center"
+  },
+  "RST": {
+    "city": "Rochester, MN",
+    "name": "Rochester International"
+  },
+  "RSW": {
+    "city": "Fort Myers, FL",
+    "name": "Southwest Florida International"
+  },
+  "SAF": {
+    "city": "Santa Fe, NM",
+    "name": "Santa Fe Regional"
+  },
+  "SAN": {
+    "city": "San Diego, CA",
+    "name": "San Diego International"
+  },
+  "SAT": {
+    "city": "San Antonio, TX",
+    "name": "San Antonio International"
+  },
+  "SAV": {
+    "city": "Savannah, GA",
+    "name": "Savannah/Hilton Head International"
+  },
+  "SBA": {
+    "city": "Santa Barbara, CA",
+    "name": "Santa Barbara Airport"
+  },
+  "SBN": {
+    "city": "South Bend, IN",
+    "name": "South Bend International"
+  },
+  "SBP": {
+    "city": "San Luis Obispo, CA",
+    "name": "San Luis Obispo County Regional"
+  },
+  "SCC": {
+    "city": "Deadhorse, AK",
+    "name": "Deadhorse Airport"
+  },
+  "SCE": {
+    "city": "State College, PA",
+    "name": "University Park Airport"
+  },
+  "SCK": {
+    "city": "Stockton, CA",
+    "name": "Stockton Metropolitan"
+  },
+  "SDF": {
+    "city": "Louisville, KY",
+    "name": "Louisville Muhammad Ali International"
+  },
+  "SEA": {
+    "city": "Seattle, WA",
+    "name": "Seattle-Tacoma International"
+  },
+  "SFB": {
+    "city": "Sanford, FL",
+    "name": "Orlando Sanford International"
+  },
+  "SFO": {
+    "city": "San Francisco, CA",
+    "name": "San Francisco International"
+  },
+  "SGF": {
+    "city": "Springfield, MO",
+    "name": "Springfield-Branson National"
+  },
+  "SGU": {
+    "city": "St. George, UT",
+    "name": "St. George Regional"
+  },
+  "SHR": {
+    "city": "Sheridan, WY",
+    "name": "Sheridan County Airport"
+  },
+  "SHV": {
+    "city": "Shreveport, LA",
+    "name": "Shreveport Regional"
+  },
+  "SIT": {
+    "city": "Sitka, AK",
+    "name": "Sitka Rocky Gutierrez Airport"
+  },
+  "SJC": {
+    "city": "San Jose, CA",
+    "name": "Norman Y. Mineta San Jose International"
+  },
+  "SJT": {
+    "city": "San Angelo, TX",
+    "name": "San Angelo Regional"
+  },
+  "SJU": {
+    "city": "San Juan, PR",
+    "name": "Luis Muñoz Marín International"
+  },
+  "SLC": {
+    "city": "Salt Lake City, UT",
+    "name": "Salt Lake City International"
+  },
+  "SLN": {
+    "city": "Salina, KS",
+    "name": "Salina Regional"
+  },
+  "SMF": {
+    "city": "Sacramento, CA",
+    "name": "Sacramento International"
+  },
+  "SNA": {
+    "city": "Santa Ana, CA",
+    "name": "John Wayne Airport (Orange County)"
+  },
+  "SPI": {
+    "city": "Springfield, IL",
+    "name": "Abraham Lincoln Capital Airport"
+  },
+  "SPN": {
+    "city": "Saipan",
+    "name": "Saipan International"
+  },
+  "SPS": {
+    "city": "Wichita Falls, TX",
+    "name": "Wichita Falls Municipal / Sheppard AFB"
+  },
+  "SRQ": {
+    "city": "Sarasota, FL",
+    "name": "Sarasota-Bradenton International"
+  },
+  "STL": {
+    "city": "St. Louis, MO",
+    "name": "St. Louis Lambert International"
+  },
+  "STS": {
+    "city": "Santa Rosa, CA",
+    "name": "Charles M. Schulz Sonoma County"
+  },
+  "STT": {
+    "city": "St. Thomas, USVI",
+    "name": "Cyril E. King Airport"
+  },
+  "STX": {
+    "city": "St. Croix, USVI",
+    "name": "Henry E. Rohlsen Airport"
+  },
+  "SUN": {
+    "city": "Sun Valley/Hailey, ID",
+    "name": "Friedman Memorial"
+  },
+  "SUX": {
+    "city": "Sioux City, IA",
+    "name": "Sioux Gateway Airport"
+  },
+  "SWF": {
+    "city": "Newburgh, NY",
+    "name": "New York Stewart International"
+  },
+  "SWO": {
+    "city": "Stillwater, OK",
+    "name": "Stillwater Regional"
+  },
+  "SYR": {
+    "city": "Syracuse, NY",
+    "name": "Syracuse Hancock International"
+  },
+  "TLH": {
+    "city": "Tallahassee, FL",
+    "name": "Tallahassee International"
+  },
+  "TPA": {
+    "city": "Tampa, FL",
+    "name": "Tampa International"
+  },
+  "TRI": {
+    "city": "Bristol/Johnson City/Kingsport, TN",
+    "name": "Tri-Cities Regional"
+  },
+  "TTN": {
+    "city": "Trenton, NJ",
+    "name": "Trenton-Mercer Airport"
+  },
+  "TUL": {
+    "city": "Tulsa, OK",
+    "name": "Tulsa International"
+  },
+  "TUS": {
+    "city": "Tucson, AZ",
+    "name": "Tucson International"
+  },
+  "TVC": {
+    "city": "Traverse City, MI",
+    "name": "Cherry Capital Airport"
+  },
+  "TWF": {
+    "city": "Twin Falls, ID",
+    "name": "Joslin Field-Magic Valley Regional"
+  },
+  "TXK": {
+    "city": "Texarkana, AR",
+    "name": "Texarkana Regional"
+  },
+  "TYR": {
+    "city": "Tyler, TX",
+    "name": "Tyler Pounds Regional"
+  },
+  "TYS": {
+    "city": "Knoxville, TN",
+    "name": "McGhee Tyson Airport"
+  },
+  "USA": {
+    "city": "Concord, NC",
+    "name": "Concord-Padgett Regional"
+  },
+  "VCT": {
+    "city": "Victoria, TX",
+    "name": "Victoria Regional"
+  },
+  "VPS": {
+    "city": "Valparaiso, FL",
+    "name": "Destin-Fort Walton Beach Airport"
+  },
+  "WRG": {
+    "city": "Wrangell, AK",
+    "name": "Wrangell Airport"
+  },
+  "WYS": {
+    "city": "West Yellowstone, MT",
+    "name": "Yellowstone Airport"
+  },
+  "XNA": {
+    "city": "Fayetteville/Bentonville, AR",
+    "name": "Northwest Arkansas National"
+  },
+  "XWA": {
+    "city": "Williston, ND",
+    "name": "Williston Basin International"
+  },
+  "YAK": {
+    "city": "Yakutat, AK",
+    "name": "Yakutat Airport"
+  },
+  "YUM": {
+    "city": "Yuma, AZ",
+    "name": "Yuma International"
+  }
+}
