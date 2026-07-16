@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Why is your flight late? — Delay risk lookup</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -78,6 +79,49 @@
   }
   select:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
   select:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .combo { position: relative; }
+  .combo input {
+    width: 100%;
+    font: 500 15px 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .combo input:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .combo input:disabled { opacity: 0.45; cursor: not-allowed; background: #fff; }
+  .combo-list {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 260px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(18, 32, 58, 0.12);
+    padding: 6px;
+    display: none;
+  }
+  .combo-list.open { display: block; }
+  .combo-opt {
+    font: 500 14px 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    padding: 9px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .combo-opt:hover, .combo-opt.active { background: var(--paper); }
+  .combo-opt .code { font-family: 'IBM Plex Mono', monospace; font-weight: 600; }
+  .combo-opt .city { color: var(--ink-soft); font-weight: 400; }
+  .combo-empty { font: 400 13px 'Inter', sans-serif; color: var(--ink-soft); padding: 9px 10px; }
 
   .buckets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
   .bucket {
@@ -246,11 +290,19 @@
   <div class="controls">
     <div class="field">
       <label for="origin">From</label>
-      <select id="origin" disabled><option>Loading…</option></select>
+      <div class="combo" id="originCombo">
+        <input type="text" id="origin" autocomplete="off" role="combobox" aria-expanded="false"
+          aria-controls="originList" aria-autocomplete="list" placeholder="Loading…" disabled>
+        <ul class="combo-list" id="originList" role="listbox"></ul>
+      </div>
     </div>
     <div class="field">
       <label for="dest">To</label>
-      <select id="dest" disabled><option>—</option></select>
+      <div class="combo" id="destCombo">
+        <input type="text" id="dest" autocomplete="off" role="combobox" aria-expanded="false"
+          aria-controls="destList" aria-autocomplete="list" placeholder="—" disabled>
+        <ul class="combo-list" id="destList" role="listbox"></ul>
+      </div>
     </div>
     <div class="field">
       <label for="airline">Airline</label>
@@ -310,14 +362,17 @@ const AIRLINES = {
 const BUCKET_NAMES = { morning: 'Morning (5–11)', afternoon: 'Afternoon (12–16)', evening: 'Evening (17–20)', night: 'Night (21–4)' };
 
 let DATA = {};
+let AIRPORTS = {};
 let sel = { origin: '', dest: '', airline: '', bucket: '' };
 
 const $ = id => document.getElementById(id);
 const airlineName = c => AIRLINES[c] ? `${AIRLINES[c]} (${c})` : c;
 
-fetch('data.json')
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d => { DATA = d; initOrigin(); })
+Promise.all([
+  fetch('data.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+  fetch('airports.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).catch(() => ({}))
+])
+  .then(([d, a]) => { DATA = d; AIRPORTS = a; initOrigin(); })
   .catch(() => { $('empty').innerHTML = 'Could not load data.json.<br>If you opened this file directly, run a local server: <code>python -m http.server</code>'; });
 
 function fill(el, options, placeholder) {
@@ -326,25 +381,197 @@ function fill(el, options, placeholder) {
   el.disabled = false;
 }
 
-function initOrigin() {
-  fill($('origin'), Object.keys(DATA).sort().map(v => ({ v, t: v })), 'Select origin');
+// Type-ahead combobox for the origin/dest airport inputs.
+function makeCombo({ inputId, listId, getCandidates, onSelect, onClear }) {
+  const input = $(inputId);
+  const list = $(listId);
+  let items = [];
+  let activeIndex = -1;
+  let selectedCode = '';
+
+  function labelFor(code) {
+    const a = AIRPORTS[code];
+    if (a && a.name) return `${code} — ${a.name}`;
+    if (a && a.city) return `${code} — ${a.city}`;
+    return code;
+  }
+
+  function matchTier(code, qn) {
+    if (code.toLowerCase().includes(qn)) return 0;
+    const a = AIRPORTS[code] || {};
+    const hay = `${a.name || ''} ${a.city || ''}`.toLowerCase();
+    if (!hay.trim()) return -1;
+    if (hay.startsWith(qn)) return 1;
+    if (hay.split(/[^a-z0-9']+/).some(w => w && w.startsWith(qn))) return 1;
+    if (hay.includes(qn)) return 2;
+    return -1;
+  }
+
+  function search(q) {
+    const candidates = getCandidates();
+    if (!q) return candidates.slice().sort().slice(0, 8);
+    const qn = q.toLowerCase();
+    return candidates
+      .map(code => ({ code, tier: matchTier(code, qn) }))
+      .filter(x => x.tier >= 0)
+      .sort((a, b) => a.tier - b.tier || a.code.localeCompare(b.code))
+      .slice(0, 8)
+      .map(x => x.code);
+  }
+
+  function renderList(codes) {
+    items = codes;
+    activeIndex = codes.length ? 0 : -1;
+    if (!codes.length) {
+      list.innerHTML = `<li class="combo-empty">No matching airports</li>`;
+    } else {
+      list.innerHTML = codes.map((code, i) => {
+        const a = AIRPORTS[code] || {};
+        const rest = a.name || a.city || '';
+        return `<li class="combo-opt${i === 0 ? ' active' : ''}" role="option" id="${listId}-opt-${i}" data-code="${code}" aria-selected="${i === 0}">` +
+          `<span class="code">${code}</span>${rest ? `<span class="city"> — ${rest}</span>` : ''}</li>`;
+      }).join('');
+    }
+    list.classList.add('open');
+    input.setAttribute('aria-expanded', 'true');
+    if (activeIndex >= 0) input.setAttribute('aria-activedescendant', `${listId}-opt-${activeIndex}`);
+    else input.removeAttribute('aria-activedescendant');
+  }
+
+  function closeList() {
+    list.classList.remove('open');
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+    activeIndex = -1;
+  }
+
+  function setActive(i) {
+    const opts = list.querySelectorAll('.combo-opt');
+    opts.forEach(o => { o.classList.remove('active'); o.setAttribute('aria-selected', 'false'); });
+    if (i >= 0 && i < opts.length) {
+      opts[i].classList.add('active');
+      opts[i].setAttribute('aria-selected', 'true');
+      input.setAttribute('aria-activedescendant', opts[i].id);
+      opts[i].scrollIntoView({ block: 'nearest' });
+    }
+    activeIndex = i;
+  }
+
+  function selectCode(code) {
+    selectedCode = code;
+    input.value = labelFor(code);
+    closeList();
+    onSelect(code);
+  }
+
+  input.addEventListener('input', () => {
+    if (selectedCode && input.value !== labelFor(selectedCode)) selectedCode = '';
+    renderList(search(input.value.trim()));
+  });
+
+  input.addEventListener('focus', () => {
+    if (input.disabled) return;
+    renderList(search(selectedCode ? '' : input.value.trim()));
+  });
+
+  input.addEventListener('keydown', e => {
+    if (input.disabled) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (!list.classList.contains('open')) { renderList(search(input.value.trim())); return; }
+      setActive(Math.min(activeIndex + 1, items.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!list.classList.contains('open')) { renderList(search(input.value.trim())); return; }
+      setActive(Math.max(activeIndex - 1, 0));
+    } else if (e.key === 'Enter') {
+      if (list.classList.contains('open') && activeIndex >= 0 && items[activeIndex]) {
+        e.preventDefault();
+        selectCode(items[activeIndex]);
+      }
+    } else if (e.key === 'Escape') {
+      closeList();
+      input.value = selectedCode ? labelFor(selectedCode) : '';
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => {
+      closeList();
+      if (selectedCode) {
+        input.value = labelFor(selectedCode);
+      } else if (input.value.trim() !== '') {
+        input.value = '';
+        onClear();
+      }
+    }, 150);
+  });
+
+  list.addEventListener('mousedown', e => {
+    const li = e.target.closest('.combo-opt');
+    if (!li) return;
+    e.preventDefault();
+    selectCode(li.dataset.code);
+  });
+
+  return {
+    reset(placeholder) {
+      selectedCode = '';
+      input.value = '';
+      if (placeholder !== undefined) input.placeholder = placeholder;
+      closeList();
+    },
+    enable() { input.disabled = false; },
+    disable(placeholder) {
+      input.disabled = true;
+      input.value = '';
+      selectedCode = '';
+      if (placeholder !== undefined) input.placeholder = placeholder;
+      closeList();
+    }
+  };
 }
 
-$('origin').addEventListener('change', e => {
-  sel.origin = e.target.value; sel.dest = ''; sel.airline = '';
-  $('airline').disabled = true; $('airline').innerHTML = '<option>—</option>';
-  if (!sel.origin) { $('dest').disabled = true; render(); return; }
-  fill($('dest'), Object.keys(DATA[sel.origin]).sort().map(v => ({ v, t: v })), 'Select destination');
-  render();
-});
+let originCombo, destCombo;
 
-$('dest').addEventListener('change', e => {
-  sel.dest = e.target.value; sel.airline = '';
-  if (!sel.dest) { $('airline').disabled = true; render(); return; }
-  const codes = Object.keys(DATA[sel.origin][sel.dest]).sort((a, b) => airlineName(a).localeCompare(airlineName(b)));
-  fill($('airline'), codes.map(v => ({ v, t: airlineName(v) })), 'Select airline');
-  render();
-});
+function initOrigin() {
+  originCombo = makeCombo({
+    inputId: 'origin', listId: 'originList',
+    getCandidates: () => Object.keys(DATA),
+    onSelect: code => {
+      sel.origin = code; sel.dest = ''; sel.airline = '';
+      $('airline').disabled = true; $('airline').innerHTML = '<option>—</option>';
+      destCombo.reset('Select destination');
+      destCombo.enable();
+      render();
+    },
+    onClear: () => {
+      sel.origin = ''; sel.dest = ''; sel.airline = '';
+      destCombo.disable('—');
+      $('airline').disabled = true; $('airline').innerHTML = '<option>—</option>';
+      render();
+    }
+  });
+
+  destCombo = makeCombo({
+    inputId: 'dest', listId: 'destList',
+    getCandidates: () => sel.origin ? Object.keys(DATA[sel.origin]) : [],
+    onSelect: code => {
+      sel.dest = code; sel.airline = '';
+      const codes = Object.keys(DATA[sel.origin][sel.dest]).sort((a, b) => airlineName(a).localeCompare(airlineName(b)));
+      fill($('airline'), codes.map(v => ({ v, t: airlineName(v) })), 'Select airline');
+      render();
+    },
+    onClear: () => {
+      sel.dest = ''; sel.airline = '';
+      $('airline').disabled = true; $('airline').innerHTML = '<option>—</option>';
+      render();
+    }
+  });
+
+  originCombo.enable();
+  $('origin').placeholder = 'Select origin';
+}
 
 $('airline').addEventListener('change', e => { sel.airline = e.target.value; syncBuckets(); render(); });
 
