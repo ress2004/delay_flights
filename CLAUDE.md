@@ -55,13 +55,14 @@ python -m http.server
   `pct_delayed`, `median_delay` (nullable), and `causes` (`late_aircraft`,
   `carrier`, `weather`, `nas` — all optional/nullable percentages that may
   not sum to 100 or may be entirely absent for low-volume combinations).
-  `docs/index.html`'s JS (`render()`, `findAlternative()`, etc.) depends on
+  `docs/index.html`'s JS (`render()`, `findAlternatives()`, etc.) depends on
   this exact nesting and key set.
 - **Delay definition**: departure 15+ minutes behind schedule (US DOT
   standard). Combinations with fewer than 100 flights are excluded from the
   dataset upstream in BigQuery.
 - **Frontend is entirely self-contained**: no framework, no bundler, all
   logic inline in `docs/index.html`'s `<script>` block. Airline code→name
-  mapping (`AIRLINES`) and time-bucket labels (`BUCKET_NAMES`) are hardcoded
-  there and must be kept in sync with whatever airline/bucket values appear
-  in `data.json`.
+  mapping (`AIRLINES`), time-bucket labels (`BUCKET_NAMES`), and the
+  twin-airport lookup used for "nearby airport" tips (`METRO_GROUPS`) are
+  hardcoded there and must be kept in sync with whatever airline/bucket/
+  airport-code values appear in `data.json`.

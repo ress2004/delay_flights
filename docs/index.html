@@ -204,10 +204,15 @@
   .cause-legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
   .no-causes { font-size: 13px; color: var(--amber-dim); margin-bottom: 4px; }
 
-  .tip {
+  .tips {
     border-top: 1px solid var(--board-line);
     margin-top: 20px;
     padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tip {
     font-size: 14px;
     line-height: 1.55;
   }
@@ -341,7 +346,7 @@
       <div class="cause-bar" id="bBar"></div>
       <div class="cause-legend" id="bLegend"></div>
     </div>
-    <div class="tip" id="bTip"></div>
+    <div class="tips" id="bTips"></div>
     <div class="fineprint" id="bFine"></div>
   </section>
 
@@ -360,6 +365,21 @@ const AIRLINES = {
   '9E': 'Endeavor', MX: 'Breeze', XP: 'Avelo'
 };
 const BUCKET_NAMES = { morning: 'Morning (5–11)', afternoon: 'Afternoon (12–16)', evening: 'Evening (17–20)', night: 'Night (21–4)' };
+// Airports that are genuinely twin/multi airports of one city — kept tight
+// on purpose (not a fuzzy driving-radius list) to avoid surprising suggestions.
+const METRO_GROUPS = {
+  JFK: 'nyc', LGA: 'nyc', EWR: 'nyc',
+  ORD: 'chi', MDW: 'chi',
+  IAH: 'hou', HOU: 'hou',
+  DFW: 'dal', DAL: 'dal',
+  DCA: 'dc', IAD: 'dc', BWI: 'dc',
+  LAX: 'la', BUR: 'la', LGB: 'la', ONT: 'la', SNA: 'la',
+  SFO: 'bay', OAK: 'bay', SJC: 'bay',
+  MIA: 'mia', FLL: 'mia', PBI: 'mia',
+  MCO: 'orl', SFB: 'orl',
+  TPA: 'tpa', PIE: 'tpa'
+};
+const siblingAirports = code => Object.keys(METRO_GROUPS).filter(c => c !== code && METRO_GROUPS[c] === METRO_GROUPS[code]);
 
 let DATA = {};
 let AIRPORTS = {};
@@ -596,21 +616,72 @@ function syncBuckets() {
 
 function riskClass(p) { return p < 20 ? 'good' : p <= 35 ? 'warn' : 'bad'; }
 
-function findAlternative(cur) {
-  const route = DATA[sel.origin][sel.dest];
+function bestAirlineAt(origin, dest, bucket) {
+  const route = DATA[origin]?.[dest];
+  if (!route) return null;
   let best = null;
+  for (const al of Object.keys(route)) {
+    const s = route[al][bucket];
+    if (s && (!best || s.pct_delayed < best.pct)) best = { airline: al, pct: s.pct_delayed };
+  }
+  return best;
+}
+
+function findAlternatives(cur) {
+  const route = DATA[sel.origin][sel.dest];
+  const results = [];
+
+  let bestTime = null;
   for (const b of Object.keys(route[sel.airline])) {
     if (b === sel.bucket) continue;
     const s = route[sel.airline][b];
-    if (!best || s.pct_delayed < best.pct) best = { kind: 'time', label: BUCKET_NAMES[b].toLowerCase(), pct: s.pct_delayed };
+    if (!bestTime || s.pct_delayed < bestTime.pct) bestTime = { bucket: b, pct: s.pct_delayed };
   }
+  if (bestTime && cur - bestTime.pct >= 5) {
+    results.push({ kind: 'time', pct: bestTime.pct, label: BUCKET_NAMES[bestTime.bucket].toLowerCase() });
+  }
+
+  let bestAirline = null;
   for (const al of Object.keys(route)) {
     if (al === sel.airline) continue;
     const s = route[al][sel.bucket];
-    if (s && (!best || s.pct_delayed < best.pct)) best = { kind: 'airline', label: airlineName(al), pct: s.pct_delayed };
+    if (s && (!bestAirline || s.pct_delayed < bestAirline.pct)) bestAirline = { airline: al, pct: s.pct_delayed };
   }
-  if (best && cur - best.pct >= 5) return best;
-  return null;
+  if (bestAirline && cur - bestAirline.pct >= 5) {
+    results.push({ kind: 'airline', pct: bestAirline.pct, label: airlineName(bestAirline.airline) });
+  }
+
+  let bestAirport = null;
+  const origins = [sel.origin, ...siblingAirports(sel.origin)];
+  const dests = [sel.dest, ...siblingAirports(sel.dest)];
+  for (const o of origins) {
+    for (const d of dests) {
+      if (o === sel.origin && d === sel.dest) continue;
+      const cand = bestAirlineAt(o, d, sel.bucket);
+      if (cand && (!bestAirport || cand.pct < bestAirport.pct)) {
+        bestAirport = { origin: o, dest: d, airline: cand.airline, pct: cand.pct };
+      }
+    }
+  }
+  if (bestAirport && cur - bestAirport.pct >= 5) {
+    results.push({ kind: 'airport', pct: bestAirport.pct, origin: bestAirport.origin, dest: bestAirport.dest, airline: bestAirport.airline });
+  }
+
+  results.sort((a, b) => a.pct - b.pct);
+  return results.slice(0, 3);
+}
+
+function tipText(a) {
+  if (a.kind === 'time') return `Fly this route in the <b>${a.label}</b> instead: <b>${Math.round(a.pct)}%</b> delay risk.`;
+  if (a.kind === 'airline') return `On this route, <b>${a.label}</b> runs <b>${Math.round(a.pct)}%</b> in the same window.`;
+  const originChanged = a.origin !== sel.origin;
+  const destChanged = a.dest !== sel.dest;
+  let where;
+  if (originChanged && !destChanged) where = `Depart from <b>${a.origin}</b> instead of ${sel.origin}`;
+  else if (!originChanged && destChanged) where = `Fly into <b>${a.dest}</b> instead of ${sel.dest}`;
+  else where = `Try <b>${a.origin} → ${a.dest}</b> instead`;
+  const airlineNote = a.airline === sel.airline ? '' : ` on <b>${airlineName(a.airline)}</b>`;
+  return `${where}${airlineNote}: <b>${Math.round(a.pct)}%</b> delay risk.`;
 }
 
 function render() {
@@ -649,12 +720,10 @@ function render() {
     $('bCausesWrap').innerHTML = `<div class="no-causes">Not enough delayed flights here to break down causes — which is good news.</div>`;
   }
 
-  const alt = findAlternative(s.pct_delayed);
-  $('bTip').innerHTML = alt
-    ? `<span class="tag">Tip</span>${alt.kind === 'time'
-        ? `Fly this route in the <b>${alt.label}</b> instead: <b>${Math.round(alt.pct)}%</b> delay risk.`
-        : `On this route, <b>${alt.label}</b> runs <b>${Math.round(alt.pct)}%</b> in the same window.`}`
-    : `<span class="tag">Tip</span>You picked well — no meaningfully better option on this route.`;
+  const alts = findAlternatives(s.pct_delayed);
+  $('bTips').innerHTML = alts.length
+    ? alts.map(a => `<div class="tip"><span class="tag">Tip</span>${tipText(a)}</div>`).join('')
+    : `<div class="tip"><span class="tag">Tip</span>You picked well — no meaningfully better option nearby.</div>`;
 
   $('bFine').textContent = `Based on ${s.flights.toLocaleString()} flights in 2025. Delay = departure 15+ min behind schedule (US DOT definition).`;
 }
