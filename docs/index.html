@@ -181,20 +181,58 @@
   .fineprint { font-size: 12px; color: var(--amber-dim); margin-top: 16px; }
 
   .empty {
-    border: 1px dashed var(--hairline);
+    background: var(--board);
     border-radius: 14px;
-    padding: 40px 28px;
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 15px;
+    padding: 22px 28px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
   }
   .empty.hide { display: none; }
+  .insights-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    border-bottom: 1px solid var(--board-line);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  .insights-list { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+  .insight-marker {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--board);
+    background: var(--amber);
+    border-radius: 3px;
+    padding: 1px 6px;
+    margin-right: 10px;
+    vertical-align: 2px;
+    flex-shrink: 0;
+  }
+  .insight-text { font-size: 14px; line-height: 1.5; color: var(--amber); }
+  .insight-text b { font-weight: 600; }
+  .insights-foot {
+    border-top: 1px solid var(--board-line);
+    margin-top: 16px;
+    padding-top: 13px;
+    font-size: 13px;
+    color: var(--amber-dim);
+  }
+  @media (max-width: 400px) {
+    .empty { padding: 18px 18px 16px; }
+    .insight-marker { display: block; margin-bottom: 4px; width: fit-content; }
+  }
 
   footer { margin-top: 48px; font-size: 13px; color: var(--ink-soft); }
   footer a { color: var(--ink); }
 
   @media (prefers-reduced-motion: no-preference) {
     .board.show { animation: settle 0.35s ease-out; }
+    .empty:not(.hide) { animation: settle 0.35s ease-out; }
     @keyframes settle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   }
 </style>
@@ -227,7 +265,15 @@
     <button class="bucket" data-b="night" aria-pressed="false">Night 21–4</button>
   </div>
 
-  <div class="empty" id="empty">Choose a route, an airline, and a departure window.<br>The board will tell you the odds.</div>
+  <div class="empty" id="empty">
+    <div class="insights-head"><span>What the data shows</span><span>2025 findings</span></div>
+    <ul class="insights-list">
+      <li><span class="insight-marker">01</span><span class="insight-text">Weather causes just <b>6.4%</b> of US delay minutes. The #1 cause — <b>39.2%</b> — is an aircraft that arrived late from its previous flight.</span></li>
+      <li><span class="insight-marker">02</span><span class="insight-text">A plane that lands <b>60+ minutes late</b> has an <b>82.5%</b> chance of departing late again — <b>6.4x</b> the risk of an on-time aircraft.</span></li>
+      <li><span class="insight-marker">03</span><span class="insight-text">Delay risk climbs through the day as late aircraft pile up. Morning departures are the safest bet.</span></li>
+    </ul>
+    <div class="insights-foot">Pick a route above to check your flight ↑</div>
+  </div>
 
   <section class="board" id="board" aria-live="polite">
     <div class="board-head"><span>Departure information</span><span id="bDate">2025 full year</span></div>
