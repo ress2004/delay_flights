@@ -1,0 +1,4 @@
+google-cloud-bigquery>=3.0.0
+db-dtypes>=1.7.1
+pandas>=1.5.3
+pyarrow>=13.0.0

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why is your flight late? — Delay risk lookup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAFAF7;
+    --ink: #12203A;
+    --ink-soft: #5A657A;
+    --board: #161B26;
+    --board-line: #2A3140;
+    --amber: #FFB300;
+    --amber-dim: #B98200;
+    --good: #1D9E75;
+    --warn: #E09A1A;
+    --bad: #D03B3B;
+    --hairline: #E3E1D8;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 48px 20px 80px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .lede { color: var(--ink-soft); max-width: 54ch; margin-bottom: 40px; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 560px) { .controls { grid-template-columns: 1fr; } }
+  .field label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  select {
+    width: 100%;
+    font: 500 15px 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+  }
+  select:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  select:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .buckets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+  .bucket {
+    font: 500 14px 'Space Grotesk', sans-serif;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 8px 18px;
+    cursor: pointer;
+  }
+  .bucket:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  .bucket[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .bucket:disabled { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+
+  /* The departure board — signature element */
+  .board {
+    background: var(--board);
+    border-radius: 14px;
+    padding: 26px 28px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
+    display: none;
+  }
+  .board.show { display: block; }
+  .board-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    border-bottom: 1px solid var(--board-line);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .board-route {
+    font-size: clamp(18px, 3.4vw, 24px);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .board-sub { font-size: 13px; color: var(--amber-dim); margin-bottom: 22px; }
+  .verdict { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+  .verdict-num {
+    font-size: clamp(52px, 10vw, 76px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .verdict-num.good { color: #4ADE9C; }
+  .verdict-num.warn { color: var(--amber); }
+  .verdict-num.bad { color: #FF6B6A; }
+  .verdict-label { font-size: 14px; color: var(--amber-dim); max-width: 22ch; line-height: 1.45; }
+  .severity { font-size: 14px; color: var(--amber); margin-bottom: 24px; }
+  .severity span { color: var(--amber-dim); }
+
+  .causes-title {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 10px;
+  }
+  .cause-bar {
+    display: flex;
+    height: 14px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    background: var(--board-line);
+  }
+  .cause-bar div { height: 100%; }
+  .cb-la { background: #FF8A5C; }
+  .cb-ca { background: #FFB300; }
+  .cb-na { background: #6FA8FF; }
+  .cb-we { background: #7ED8C3; }
+  .cause-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12px; color: var(--amber-dim); margin-bottom: 4px; }
+  .cause-legend b { color: var(--amber); font-weight: 600; }
+  .cause-legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+  .no-causes { font-size: 13px; color: var(--amber-dim); margin-bottom: 4px; }
+
+  .tip {
+    border-top: 1px solid var(--board-line);
+    margin-top: 20px;
+    padding-top: 16px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .tip .tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--board);
+    background: var(--amber);
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin-right: 10px;
+  }
+  .fineprint { font-size: 12px; color: var(--amber-dim); margin-top: 16px; }
+
+  .empty {
+    border: 1px dashed var(--hairline);
+    border-radius: 14px;
+    padding: 40px 28px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .empty.hide { display: none; }
+
+  footer { margin-top: 48px; font-size: 13px; color: var(--ink-soft); }
+  footer a { color: var(--ink); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .board.show { animation: settle 0.35s ease-out; }
+    @keyframes settle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">US domestic · 2025 · 6.9M flights</p>
+  <h1>Why is your flight late?</h1>
+  <p class="lede">Weather causes just <strong>6%</strong> of US flight delays. The #1 cause — nearly <strong>40%</strong> — is a plane that was already late before your flight began. Pick a route to see its real delay risk, and when to fly it instead.</p>
+
+  <div class="controls">
+    <div class="field">
+      <label for="origin">From</label>
+      <select id="origin" disabled><option>Loading…</option></select>
+    </div>
+    <div class="field">
+      <label for="dest">To</label>
+      <select id="dest" disabled><option>—</option></select>
+    </div>
+    <div class="field">
+      <label for="airline">Airline</label>
+      <select id="airline" disabled><option>—</option></select>
+    </div>
+  </div>
+
+  <div class="buckets" role="group" aria-label="Departure time">
+    <button class="bucket" data-b="morning" aria-pressed="false">Morning 5–11</button>
+    <button class="bucket" data-b="afternoon" aria-pressed="false">Afternoon 12–16</button>
+    <button class="bucket" data-b="evening" aria-pressed="false">Evening 17–20</button>
+    <button class="bucket" data-b="night" aria-pressed="false">Night 21–4</button>
+  </div>
+
+  <div class="empty" id="empty">Choose a route, an airline, and a departure window.<br>The board will tell you the odds.</div>
+
+  <section class="board" id="board" aria-live="polite">
+    <div class="board-head"><span>Departure information</span><span id="bDate">2025 full year</span></div>
+    <div class="board-route" id="bRoute"></div>
+    <div class="board-sub" id="bSub"></div>
+    <div class="verdict">
+      <div class="verdict-num" id="bNum"></div>
+      <div class="verdict-label">chance this flight departs 15+ minutes late</div>
+    </div>
+    <div class="severity" id="bSev"></div>
+    <div class="causes-title">Where the delay minutes come from</div>
+    <div id="bCausesWrap">
+      <div class="cause-bar" id="bBar"></div>
+      <div class="cause-legend" id="bLegend"></div>
+    </div>
+    <div class="tip" id="bTip"></div>
+    <div class="fineprint" id="bFine"></div>
+  </section>
+
+  <footer>
+    Built on US DOT / BTS on-time performance data, full year 2025, aggregated in BigQuery.
+    Combinations with fewer than 100 flights are excluded. Not affiliated with any airline.
+  </footer>
+</div>
+
+<script>
+const AIRLINES = {
+  AA: 'American', DL: 'Delta', UA: 'United', WN: 'Southwest', AS: 'Alaska',
+  B6: 'JetBlue', NK: 'Spirit', F9: 'Frontier', G4: 'Allegiant', HA: 'Hawaiian',
+  SY: 'Sun Country', MQ: 'Envoy', OO: 'SkyWest', YX: 'Republic', OH: 'PSA',
+  YV: 'Mesa', QX: 'Horizon', PT: 'Piedmont', ZW: 'Air Wisconsin', C5: 'CommuteAir',
+  '9E': 'Endeavor', MX: 'Breeze', XP: 'Avelo'
+};
+const BUCKET_NAMES = { morning: 'Morning (5–11)', afternoon: 'Afternoon (12–16)', evening: 'Evening (17–20)', night: 'Night (21–4)' };
+
+let DATA = {};
+let sel = { origin: '', dest: '', airline: '', bucket: '' };
+
+const $ = id => document.getElementById(id);
+const airlineName = c => AIRLINES[c] ? `${AIRLINES[c]} (${c})` : c;
+
+fetch('data.json')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(d => { DATA = d; initOrigin(); })
+  .catch(() => { $('empty').innerHTML = 'Could not load data.json.<br>If you opened this file directly, run a local server: <code>python -m http.server</code>'; });
+
+function fill(el, options, placeholder) {
+  el.innerHTML = `<option value="">${placeholder}</option>` +
+    options.map(o => `<option value="${o.v}">${o.t}</option>`).join('');
+  el.disabled = false;
+}
+
+function initOrigin() {
+  fill($('origin'), Object.keys(DATA).sort().map(v => ({ v, t: v })), 'Select origin');
+}
+
+$('origin').addEventListener('change', e => {
+  sel.origin = e.target.value; sel.dest = ''; sel.airline = '';
+  $('airline').disabled = true; $('airline').innerHTML = '<option>—</option>';
+  if (!sel.origin) { $('dest').disabled = true; render(); return; }
+  fill($('dest'), Object.keys(DATA[sel.origin]).sort().map(v => ({ v, t: v })), 'Select destination');
+  render();
+});
+
+$('dest').addEventListener('change', e => {
+  sel.dest = e.target.value; sel.airline = '';
+  if (!sel.dest) { $('airline').disabled = true; render(); return; }
+  const codes = Object.keys(DATA[sel.origin][sel.dest]).sort((a, b) => airlineName(a).localeCompare(airlineName(b)));
+  fill($('airline'), codes.map(v => ({ v, t: airlineName(v) })), 'Select airline');
+  render();
+});
+
+$('airline').addEventListener('change', e => { sel.airline = e.target.value; syncBuckets(); render(); });
+
+document.querySelectorAll('.bucket').forEach(btn => {
+  btn.addEventListener('click', () => {
+    sel.bucket = btn.dataset.b;
+    document.querySelectorAll('.bucket').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+    render();
+  });
+});
+
+function syncBuckets() {
+  const avail = (sel.origin && sel.dest && sel.airline) ? DATA[sel.origin][sel.dest][sel.airline] : null;
+  document.querySelectorAll('.bucket').forEach(b => {
+    b.disabled = avail ? !(b.dataset.b in avail) : false;
+  });
+  if (avail && sel.bucket && !(sel.bucket in avail)) {
+    sel.bucket = '';
+    document.querySelectorAll('.bucket').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  }
+}
+
+function riskClass(p) { return p < 20 ? 'good' : p <= 35 ? 'warn' : 'bad'; }
+
+function findAlternative(cur) {
+  const route = DATA[sel.origin][sel.dest];
+  let best = null;
+  for (const b of Object.keys(route[sel.airline])) {
+    if (b === sel.bucket) continue;
+    const s = route[sel.airline][b];
+    if (!best || s.pct_delayed < best.pct) best = { kind: 'time', label: BUCKET_NAMES[b].toLowerCase(), pct: s.pct_delayed };
+  }
+  for (const al of Object.keys(route)) {
+    if (al === sel.airline) continue;
+    const s = route[al][sel.bucket];
+    if (s && (!best || s.pct_delayed < best.pct)) best = { kind: 'airline', label: airlineName(al), pct: s.pct_delayed };
+  }
+  if (best && cur - best.pct >= 5) return best;
+  return null;
+}
+
+function render() {
+  const ready = sel.origin && sel.dest && sel.airline && sel.bucket
+    && DATA[sel.origin]?.[sel.dest]?.[sel.airline]?.[sel.bucket];
+  $('empty').classList.toggle('hide', !!ready);
+  $('board').classList.toggle('show', !!ready);
+  if (!ready) return;
+
+  const s = DATA[sel.origin][sel.dest][sel.airline][sel.bucket];
+  $('bRoute').textContent = `${sel.origin} → ${sel.dest}`;
+  $('bSub').textContent = `${airlineName(sel.airline)} · ${BUCKET_NAMES[sel.bucket]}`;
+  $('bNum').textContent = Math.round(s.pct_delayed) + '%';
+  $('bNum').className = 'verdict-num ' + riskClass(s.pct_delayed);
+  $('bSev').innerHTML = s.median_delay != null
+    ? `When it runs late, the typical delay is <b>${Math.round(s.median_delay)} min</b> <span>(median)</span>`
+    : '';
+
+  const c = s.causes || {};
+  const entries = [
+    ['late_aircraft', 'Late aircraft', 'cb-la', '#FF8A5C'],
+    ['carrier', 'Airline ops', 'cb-ca', '#FFB300'],
+    ['nas', 'Airspace / ATC', 'cb-na', '#6FA8FF'],
+    ['weather', 'Weather', 'cb-we', '#7ED8C3']
+  ];
+  const hasCauses = entries.some(([k]) => c[k] != null && !Number.isNaN(c[k]));
+  if (hasCauses) {
+    $('bCausesWrap').innerHTML =
+      `<div class="cause-bar">` +
+      entries.map(([k, , cls]) => `<div class="${cls}" style="width:${c[k] || 0}%"></div>`).join('') +
+      `</div><div class="cause-legend">` +
+      entries.map(([k, name, , hex]) =>
+        `<span><span class="sw" style="background:${hex}"></span>${name} <b>${c[k] != null ? Math.round(c[k]) + '%' : '—'}</b></span>`).join('') +
+      `</div>`;
+  } else {
+    $('bCausesWrap').innerHTML = `<div class="no-causes">Not enough delayed flights here to break down causes — which is good news.</div>`;
+  }
+
+  const alt = findAlternative(s.pct_delayed);
+  $('bTip').innerHTML = alt
+    ? `<span class="tag">Tip</span>${alt.kind === 'time'
+        ? `Fly this route in the <b>${alt.label}</b> instead: <b>${Math.round(alt.pct)}%</b> delay risk.`
+        : `On this route, <b>${alt.label}</b> runs <b>${Math.round(alt.pct)}%</b> in the same window.`}`
+    : `<span class="tag">Tip</span>You picked well — no meaningfully better option on this route.`;
+
+  $('bFine').textContent = `Based on ${s.flights.toLocaleString()} flights in 2025. Delay = departure 15+ min behind schedule (US DOT definition).`;
+}
+</script>
+</body>
+</html>
