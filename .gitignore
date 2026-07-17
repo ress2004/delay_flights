@@ -11,6 +11,10 @@ venv/
 # Claude Code local settings
 .claude/settings.local.json
 
+# Agent skills: machine-local symlinks (absolute paths) into .agents/skills/,
+# regenerated per-machine via `npx skills experimental_install`
+.claude/skills/
+
 # Credentials
 *.json.key
 service-account*.json
